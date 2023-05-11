@@ -1,0 +1,19 @@
+---
+- name: this the practice nb
+  hosts: all
+  become: true
+  tasks:
+   - name: httpd installing
+     yum:
+      name: httpd
+      state: present
+   - name: service enable
+     service:
+      name: httpd
+      state: started
+      enabled: true
+   - name: indexpage
+     copy:
+      content: "welcome ansible"
+      dest: /var/www/html/index.html
+      mode: 0666
