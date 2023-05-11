@@ -1,0 +1,24 @@
+- name: Create Users and Groups
+  hosts: all
+  become: true
+
+  tasks:
+
+   - name: Create groups
+     group:
+       name: nbgroup
+       state: present
+
+   - name: Create users
+     user:
+        name: usernb
+        password: nb
+        groups: nbgroup
+        state: present
+   - name: copying bash script
+     copy:
+       src: /test.sh
+       dest: /root
+       mode: 0775
+   - name: Executing bash script
+     command: sh /root/test.sh
