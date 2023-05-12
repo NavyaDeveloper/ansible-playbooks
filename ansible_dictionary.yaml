@@ -1,0 +1,26 @@
+- name: 'create and access variables inside the playbook'
+
+  # Target: where our play will run and options it will run with
+  hosts: all
+  gather_facts: false
+  become: true
+
+  # Variable: variables that will apply to the play, on all target systems
+  vars:
+    dict:
+      dict_key: This is a dictionary variable value
+      nb_key: this is secondary value
+  # Task: the list of tasks that will be executed within the playbook
+  tasks:
+     - name: Displaying named dictionary dictionary
+       debug:
+         msg: "{{ dict }}"
+     - name: Displaying name dictionary dictionary key value with dictionary dot notation
+       debug:
+         msg:  "{{ dict.dict_key }}"
+  #in this scenario, it will show "Hello world!" because e didn't give "msg"...
+     - name: Displaying named dictionary dictionary key value with python backets notation
+       debug: "{{ dict['nb_key']}}"
+
+# Three dots indicate the end of a YAML document
+...
