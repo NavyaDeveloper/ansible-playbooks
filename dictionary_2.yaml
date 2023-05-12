@@ -1,0 +1,26 @@
+- name: create and access variables inside the playbook
+
+  # Target: where our play will run and options it will run with
+  hosts: all
+  gather_facts: false
+  become: true
+  # Variable: variables that will apply to the play, on all target systems
+  vars:
+     - mydict: {
+                'Name': 'nb',
+                'Email': 'nbinfo@google.com',
+                'location': 'usa'
+                }
+
+  # Task: the list of tasks that will be executed within the playbook
+  tasks:
+     - name: Displaying named dictionary dictionary
+       debug:
+         msg: "{{ mydict }}"
+     - name: Displaying name dictionary dictionary key value with dictionary dot notation
+       debug:
+         msg: "{{ mydict }}"
+     - name: Displaying named dictionary dictionary key value with python backets notation
+       debug: "{{['mydict']}}"
+
+# Three dots indicate the end of a YAML document
